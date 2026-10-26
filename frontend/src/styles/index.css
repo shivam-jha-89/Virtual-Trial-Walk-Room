@@ -1,0 +1,82 @@
+:root {
+  --bg: #0f1115;
+  --panel: #161923;
+  --border: #262a38;
+  --text: #e8e9ee;
+  --text-dim: #9aa0b0;
+  --accent: #6c8cff;
+  --radius: 10px;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+
+.app__header {
+  padding: 24px 32px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.app__header h1 { margin: 0 0 4px; font-size: 1.6rem; }
+.app__header p { margin: 0; color: var(--text-dim); }
+
+.app__main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 300px 1fr 340px;
+  gap: 16px;
+  padding: 20px 32px;
+}
+
+.app__panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  overflow: auto;
+}
+.app__panel h2 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-dim); margin: 0 0 12px; }
+.app__panel--center { padding: 0; overflow: hidden; }
+
+.measurement-form__field { display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; margin-bottom: 12px; }
+.measurement-form button, .pose-estimator__controls button, .garment-selector__filters button, .garment-selector__pagination button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.measurement-form button:disabled, .pose-estimator__controls button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.pose-estimator__video-wrap { position: relative; aspect-ratio: 4/3; background: #000; border-radius: var(--radius); overflow: hidden; margin-bottom: 10px; }
+.pose-estimator__video { width: 100%; height: 100%; object-fit: cover; }
+.pose-estimator__placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--text-dim); }
+.pose-estimator__controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pose-estimator__confidence { font-size: 0.8rem; color: var(--text-dim); }
+.pose-estimator__error { color: #ff6b6b; font-size: 0.8rem; }
+
+.garment-selector__filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.garment-selector__filters button { background: transparent; border: 1px solid var(--border); color: var(--text-dim); }
+.garment-selector__filters button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.garment-selector__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.garment-card { background: #1d2130; border: 1px solid var(--border); border-radius: 8px; padding: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
+.garment-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; background: #2a2f42; }
+.garment-card.selected { border-color: var(--accent); }
+.garment-card__name { font-size: 0.75rem; }
+.garment-card__price { font-size: 0.7rem; color: var(--text-dim); }
+
+.garment-selector__pagination { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 0.8rem; }
+.garment-selector__error { color: #ff6b6b; font-size: 0.85rem; }
+
+@media (max-width: 1000px) {
+  .app__main { grid-template-columns: 1fr; }
+}
